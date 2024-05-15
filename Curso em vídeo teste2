@@ -1,0 +1,83 @@
+create database cadastro
+default character set utf8
+default collate utf8_general_ci;
+
+Create table pessoas (
+id int not null auto_increment,
+nome varchar (30) not null,
+nascimento date ,
+sexo enum ('M', 'F') ,
+peso decimal (5,2),
+altura decimal (3,2),
+nacionalidade varchar (20) default 'Brasil',
+primary key (id)
+) default charset = utf8;
+
+-----------------------------------------------------------------------------------------------------------------
+
+insert into pessoas
+(nome, nascimento, sexo, peso, altura, nacionalidade)
+values
+('Junin','2006-08-15', 'M', '56.7', '1.69', 'Brasil');
+
+select * from pessoas
+
+----------------------------------------------------------------------------------------------------------------------
+
+update pessoas
+set nascimento = '2005-05-14'
+where nome = 'Junin';
+
+----------------------------------------------------------------------------------------------------------------------
+
+select * from pessoas
+
+select sexo
+from pessoas
+where sexo = 'Junin';
+
+insert into pessoas
+values (default, 'Pedro', '2001-06-22', 'M', '55.6', '1.76', default);
+
+delete from pessoas
+where nome = 'Pedro'; 
+
+update pessoas
+set nacionalidade = 'Chile'
+where nome = 'junin'; 
+
+select * from pessoas
+
+-------------------------------------------------------------------------------
+
+create table enderecos (
+idd int not null auto_increment,
+rua varchar (30),
+número decimal,
+bairro varchar (30),
+primary key (idd),
+FOREIGN KEY(idd) REFERENCES pessoas (id)
+)default charset = utf8;
+
+-------------------------------------------------------------------------
+
+insert into pessoas 
+values (default, 'Pedin', '2004-12-01', 'M', '67.8', '1.71', default);
+
+set @id = (2);
+
+insert into enderecos
+values (default, 'Fortal', '13', 'cachimbo');
+
+commit;
+
+select *
+from pessoas
+inner join enderecos on idd = id
+where nome = 'pedin';
+
+update pessoas
+set nome = 'Godofredo'
+where id = '1';
+
+select * from pessoas
